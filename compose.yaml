@@ -1,0 +1,56 @@
+services:
+  backend:
+    container_name: backend_selftech
+    build: 
+      context: backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./resources:/app/resources
+    command: bash -c "./docker_entry.sh"
+  
+  compressor:
+    container_name: compressor_selftech
+    build: 
+      context: compressor
+    volumes:
+      - ./resources:/app/resources
+    command: bash -c "./docker_entry.sh"
+  
+  frontend: 
+    container_name: frontend_selftech
+    build:
+      context: frontend
+    volumes:
+      - ./frontend:/app/frontend
+      - ./resources:/app/resources
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    command: bash -c "./docker_entry_build.sh"
+
+  webserver:
+    container_name: webserver_selftech
+    image: nginx
+    ports:
+      - 7979:80
+      - 443:443
+    restart: always
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./frontend/dist:/usr/share/nginx/html
+      - ./resources:/usr/share/nginx/resources
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email bartekn337@gmail.com -d selftech.pl -d www.selftech.pl --agree-tos

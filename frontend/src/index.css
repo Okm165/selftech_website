@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: #0f172a #e8e8e8;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #e8e8e8;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0f172a;
+  border-radius: 0px;
+  border: 0px solid #ffffff;
+}
+
+@font-face {
+  font-family: Tangerine-Bold;
+  src: url("Tangerine-Bold.ttf");
+}
+
+@font-face {
+  font-family: Tangerine-Regular;
+  src: url("Tangerine-Regular.ttf");
+}
+
+body {
+  @apply bg-gray-300;
+}
+
+.header_background {
+  background:
+    /* top, transparent black, faked with gradient */ linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.3)
+    ),
+    /* bottom, image */ url("/resources/_tiles/header.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@layer utilities {
+  .gradient {
+    background-size: 100% 100%;
+    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    /* background-image: radial-gradient(100% 100% at 0% 100%,
+        #5ea4c611 0%,
+        #073aff00 100%),
+      radial-gradient(100% 100% at 22% 25%, #c281f011 0%, #073aff11 100%),
+      radial-gradient(100% 100% at 64% 44%, #81f0cc11 0%, #073aff11 100%),
+      radial-gradient(100% 100% at 73% 93%, #f0e18111 0%, #073aff11 100%),
+      radial-gradient(100% 100% at 98% 1%, #3f1e7911 0%, #073aff11 100%),
+      linear-gradient(172deg, #ffffffff 0%, #f4f4f4ff 100%); */
+    background-image: radial-gradient(
+        100% 100% at 10% 100%,
+        #5ea4c632 0%,
+        #073aff02 100%
+      ),
+      radial-gradient(100% 100% at 22% 25%, #c281f033 0%, #073aff11 97%),
+      /* radial-gradient(30% 50% at 64% 44%, #81f0cc44 0%, #073aff00 97%),
+        radial-gradient(30% 50% at 73% 93%, #f0e18144 0%, #073aff00 97%),
+        radial-gradient(30% 50% at 98% 1%, #3f1e7966 0%, #073aff00 100%), */
+        linear-gradient(172deg, #ffffffff 0%, #f4f4f4ff 98%);
+    box-shadow: 0px -10px 40px 0px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.image_clip {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.image_clip_right {
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+}
+
+.image_clip_left {
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.image_quality{
+  background-color: #0f172a99;
+  backdrop-filter: blur(1px);
+  transition: all ease-in-out 200ms;
+}
