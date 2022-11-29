@@ -1,0 +1,17 @@
+# /etc/systemd/system/selftech_website.service
+
+[Unit]
+Description=Selftech Website Docker Compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+WorkingDirectory=/home/server/selftech_website
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
