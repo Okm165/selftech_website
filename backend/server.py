@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route("/resourcesapi/<path:filename>")
-def serve(filename):
+def resourcesapi(filename):
     relpath = safe_join('resources', filename)
     if os.path.isdir(relpath):
         return json.dumps([x.name for x in os.scandir(relpath)]), 200
