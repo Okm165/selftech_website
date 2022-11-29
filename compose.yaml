@@ -34,7 +34,7 @@ services:
     container_name: webserver_selftech
     image: nginx
     ports:
-      - 80:80
+      - 7979:80
       - 443:443
     restart: always
     depends_on:
