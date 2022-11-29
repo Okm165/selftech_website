@@ -40,7 +40,7 @@ services:
     depends_on:
       - frontend
       - backend
-      - certbot
+      # - certbot
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./frontend/dist:/usr/share/nginx/html
@@ -48,10 +48,10 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
 
-  certbot:
-    image: certbot/certbot:arm64v8-latest
-    container_name: certbot
-    volumes: 
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email bartekn337@gmail.com -d selftech.pl -d www.selftech.pl --agree-tos
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes: 
+  #     - ./certbot/conf:/etc/letsencrypt
+  #     - ./certbot/www:/var/www/certbot
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email bartekn337@gmail.com -d selftech.pl -d www.selftech.pl --agree-tos

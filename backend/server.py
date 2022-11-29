@@ -6,6 +6,7 @@ from flask_cors import CORS
 from werkzeug.security import safe_join
 import os
 import json
+from waitress import serve
 
 app = Flask(__name__)
 CORS(app)
@@ -20,4 +21,4 @@ def serve(filename):
     else:
         return "Not found", 404
 
-app.run(host="0.0.0.0", port=5000)
+serve(app, host="0.0.0.0", port=5000)
